@@ -11,7 +11,6 @@
 ## 3. Types of Prompts
 ### Text-based Prompts
 - Account for 99% of current LLM interactions.
-- Focus of the video.
 
 ### Multimodal Prompts
 - Involve other modes such as images, sound, or video.
@@ -30,7 +29,7 @@
   - Too much user control.
   - Inconsistent or undesirable outputs.
   - User errors (typos, misaligned phrasing).
-  - Risk of hallucinations or poor results.
+  - Risk of hallucinations or poor results, especially when user phrasing doesn’t align with intended style (e.g., analogies, mathematical details).
 
 ### Dynamic Prompts
 - Solution to static prompt issues.
@@ -47,13 +46,41 @@
 - Use `template.invoke()` to fill placeholders with user values.
 
 ### Advantages over f-strings
-- **Validation**: Ensures all declared variables are present and no extras exist.
-- **Reusability**: Templates can be saved to JSON files and reused across applications.
-- **Integration**: Seamlessly connects with LangChain components like Chains.
-  - Example: `chain = template | model`
+- **Validation:**
+  - Built-in validation (`validate_template=True`).
+  - Ensures all declared variables are present and no extras exist.
+  - Prevents runtime errors and helps during development.
+- **Reusability:**
+  - Templates can be saved to JSON files using `save()`.
+  - They can be loaded and reused across different files or applications using `load_prompt()`.
+  - Promotes modularity and reduces code bulk.
+- **Integration:**
+  - Seamlessly connects with LangChain components like Chains.
+  - Example: `chain = template | model`.
   - Allows a single `chain.invoke()` call for both prompt formatting and LLM invocation.
 
-## 7. Messages: Managing Chat History and Context
+## 7. ChatPromptTemplate in LangChain
+- LangChain also provides **ChatPromptTemplate** for building prompts specifically tailored to chat models.
+- Instead of a single text string, ChatPromptTemplate works with structured message types.
+- Implementation:
+  - Import `ChatPromptTemplate` from `langchain_core.prompts`.
+  - Define a template with roles and placeholders (e.g., system, human).
+  - Example:
+    ```python
+    from langchain_core.prompts import ChatPromptTemplate
+
+    template = ChatPromptTemplate.from_messages([
+        ("system", "You are a helpful assistant."),
+        ("human", "Explain {topic} in {style} style.")
+    ])
+    ```
+  - Use `template.invoke()` to fill placeholders with user-provided values.
+- Benefits:
+  - Provides role awareness (system, human, AI).
+  - Ensures structured prompts for conversational tasks.
+  - Integrates seamlessly with chat models like GPT-3.5, GPT-4, Claude, Gemini.
+
+## 8. Messages: Managing Chat History and Context
 ### Problem with Basic Chatbots
 - Lack context and memory.
 - Cannot handle follow-up questions that depend on prior conversation.
@@ -68,19 +95,21 @@
 - Can confuse the LLM as conversation grows.
 
 ### LangChain’s Solution: Message Types
-- **SystemMessage**: Defines AI’s role/persona (e.g., "You are a helpful assistant").
-- **HumanMessage**: Represents user input.
-- **AIMessage**: Represents AI responses.
+- **SystemMessage:** Defines AI’s role/persona (e.g., "You are a helpful assistant").
+- **HumanMessage:** Represents user input.
+- **AIMessage:** Represents AI responses.
 
-## 8. Building a Chatbot with Message Types
+## 9. Building a Chatbot with Message Types
 ### Implementation Steps
 1. Import `SystemMessage`, `HumanMessage`, and `AIMessage` from `langchain_core.messages`.
 2. Initialize `chat_history` as an empty list.
 3. Append a `SystemMessage` at the start to define AI’s role.
 4. For user input, create a `HumanMessage` and append to `chat_history`.
-5. Pass `chat_history` to `model.invoke()`.
+5. Pass `chat_history` to `model.invoke()`.  
+   - Important: `model.invoke()` is flexible and accepts a list of messages directly.
 6. When AI responds, create an `AIMessage` and append to `chat_history`.
 
 ### Benefits
 - Structured approach ensures clear context.
 - Improves conversational coherence by distinguishing roles.
+- Prevents errors in long conversations by maintaining role awareness.
