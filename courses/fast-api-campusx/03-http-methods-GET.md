@@ -1,4 +1,4 @@
-# 📘 HTTP Methods and FastAPI Project Notes
+# 📘 HTTP Methods and FastAPI
 
 ## 🌐 Understanding HTTP Methods
 
