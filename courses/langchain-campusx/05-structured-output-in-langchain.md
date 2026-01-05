@@ -1,4 +1,4 @@
-# Structured Output in LangChain - Complete Notes
+# Structured Output in LangChain
 
 ## Overview
 Structured output enables LLMs to return responses in well-defined data formats (like JSON) instead of unstructured text, making outputs machine-readable and enabling integration with databases, APIs, and tools.
@@ -50,7 +50,7 @@ class Person(TypedDict):
     name: str
     age: int
 
-new_person: Person = {'name': 'Nitish', 'age': 35}
+new_person: Person = {'name': 'Shahzaib', 'age': 28}
 ```
 
 ### LangChain Integration
@@ -106,10 +106,10 @@ class Student(BaseModel):
     name: str
 
 # Valid
-student = Student(**{'name': 'Nitish'})
+student = Student(**{'name': 'Shahzaib'})
 
 # Invalid - throws ValidationError
-student = Student(**{'name': 32})  # Error: Input should be valid string
+student = Student(**{'name': 28})  # Error: Input should be valid string
 ```
 
 ### Advanced Pydantic Features
@@ -117,7 +117,7 @@ student = Student(**{'name': 32})  # Error: Input should be valid string
 **1. Default Values**
 ```python
 class Student(BaseModel):
-    name: str = "Nitish"
+    name: str = "Shahzaib"
 ```
 
 **2. Optional Fields**
@@ -135,7 +135,7 @@ class Student(BaseModel):
     age: int
 
 # '32' (string) automatically converted to 32 (int)
-student = Student(name='Test', age='32')
+student = Student(name='Test', age='28')
 ```
 
 **4. Built-in Validations**
