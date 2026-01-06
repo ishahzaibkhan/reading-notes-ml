@@ -1,4 +1,4 @@
-# Output Parsers in LangChain - Complete Notes
+# Output Parsers in LangChain
 
 ## Overview
 Output parsers are LangChain classes that convert raw LLM textual responses into structured formats (JSON, CSV, Pydantic models), ensuring consistency, validation, and ease of use in applications.
