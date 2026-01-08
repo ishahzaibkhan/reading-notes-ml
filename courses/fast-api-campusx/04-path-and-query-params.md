@@ -94,21 +94,18 @@ else:
 from fastapi import Query, HTTPException
 
 @app.get("/sort")
-def sort_patients(
-    sort_by: str = Query(..., description="Sort on basis of Height, Weight or BMI"),
-    order: str = Query("ascending", description="Sort in ascending or descending order")
-):
-    # Validate sort_by field
-    if sort_by not in ["Height", "Weight", "BMI"]:
-        raise HTTPException(status_code=400, detail="Valid fields: Height, Weight, BMI")
+def sort_patients(sort_by: str = Query(..., description="Sort by height, weight, or bmi", example="height"), order: str = Query("ascending", description="Order of sorting: ascending or descending", example="ascending")):
+    valid_fields = ["height", "weight", "bmi"]
+    if sort_by not in valid_fields:
+        raise HTTPException(status_code=400, detail="Valid fields: height, weight, bmi")
     
-    # Validate order
     if order not in ["ascending", "descending"]:
         raise HTTPException(status_code=400, detail="Valid options: ascending, descending")
-    
-    # Load data and sort
+        
+    data = data_loader()
+
     sort_order = True if order == "descending" else False
-    sorted_data = sorted(data.values(), key=lambda x: x[sort_by], reverse=sort_order)
+    sorted_data = sorted(data.values(), key=lambda x: x.get(sort_by), reverse=sort_order)
     return sorted_data
 ```
 
