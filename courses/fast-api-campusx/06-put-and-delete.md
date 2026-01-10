@@ -1,7 +1,4 @@
-# FastAPI PUT and DELETE Operations - Patient Management System
-
-## Overview
-This guide covers implementing UPDATE (PUT) and DELETE operations to complete a CRUD API for a patient management system in FastAPI.
+# FastAPI PUT and DELETE Operations
 
 ## Update Endpoint Implementation
 
@@ -79,22 +76,6 @@ This method converts the `PatientUpdate` object into a dictionary containing **o
 - This triggers automatic recalculation of computed fields
 - Then convert the `Patient` object back to dictionary for storage
 
-### Update Endpoint Testing Examples
-
-**Example 1: Update Multiple Fields**
-- Patient P004: Arjun Verma, Bengaluru, Weight 95, BMI 29.32, Overweight
-- Update: `city = "Mumbai"`, `weight = 90`
-- Result: City → Mumbai, Weight → 90, BMI → 27, Verdict → Normal
-
-**Example 2: Partial Update**
-- Patient P001: Ananya Sharma
-- Update: `name = "Ananya Verma"`
-- Result: Only name changes, other fields unchanged
-
-**Example 3: Non-existent Patient**
-- Request: `patient_id = "P010"`
-- Result: 404 Not Found error with "Patient Not Found"
-
 ## Delete Endpoint Implementation
 
 ### HTTP Method & Design
@@ -130,14 +111,6 @@ def delete_patient(patient_id: str):
 **Example 2: Non-existent Patient**
 - Request: `patient_id = "P007"`
 - Result: 404 Not Found error with "Patient Not Found"
-
-## Complete CRUD Operations Summary
-
-The patient management system now includes:
-1. **Create**: Add new patients
-2. **Retrieve**: View all patients, specific patient, sorted views
-3. **Update**: Edit existing patient details with automatic recalculation of computed fields
-4. **Delete**: Remove patient records
 
 ## Key Takeaways
 
