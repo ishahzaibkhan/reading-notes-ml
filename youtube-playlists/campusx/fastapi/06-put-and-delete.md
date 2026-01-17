@@ -35,8 +35,8 @@ class PatientUpdate(BaseModel):
 ### Update Function
 ```python
 @app.put("/edit/{patient_id}")
-def update_patient(patient_id: str, patient_update: PatientUpdate):
-    data = load_data()
+def update_patient(patient_id: str, patient_update: UpdatePatient):
+    data = data_loader()
     
     # Check if patient exists
     if patient_id not in data:
@@ -46,10 +46,10 @@ def update_patient(patient_id: str, patient_update: PatientUpdate):
     existing_patient_info = data[patient_id]
     
     # Convert PatientUpdate to dictionary, excluding unset fields
-    updated_patient_info_partial = patient_update.model_dump(exclude_unset=True)
+    updated_patient_info = patient_update.model_dump(exclude_unset=True)
     
     # Apply updates to existing info
-    for key, value in updated_patient_info_partial.items():
+    for key, value in updated_patient_info.items():
         existing_patient_info[key] = value
     
     # Re-create Patient object to recalculate BMI and Verdict
@@ -57,13 +57,14 @@ def update_patient(patient_id: str, patient_update: PatientUpdate):
     patient_pydantic_object = Patient(**existing_patient_info)
     
     # Convert back to dictionary, excluding 'id'
-    updated_final_patient_data = patient_pydantic_object.model_dump(exclude={'id'})
+    existing_patient_info = patient_pydantic_object.model_dump(exclude={'id'})
     
     # Update and save
-    data[patient_id] = updated_final_patient_data
+    data[patient_id] = existing_patient_info
     save_data(data)
     
     return JSONResponse(status_code=200, content={"message": "Patient Updated"})
+
 ```
 
 ### Critical Method: `model_dump(exclude_unset=True)`
