@@ -243,5 +243,3 @@ When using `with_structured_output()`, LangChain automatically:
 2. Defines expected fields and types
 3. LLM returns JSON response
 4. Python parses into dictionary/object
-
-
