@@ -1,0 +1,138 @@
+# Word Embeddings and Word2Vec
+
+## Limitations of Bag-of-Words
+
+### Core Flaw
+- Treats language as a literal "bag-of-words"
+- **Ignores semantic nature and meaning of text**
+- No understanding of context or relationships between words
+
+---
+
+## Word2Vec (2013)
+
+### Revolutionary Advancement
+- **First successful attempt** at capturing meaning of text in embeddings
+- Learns semantic representations of words
+- Trained on vast amounts of textual data (e.g., entirety of Wikipedia)
+
+### Technology: Neural Networks
+
+**Structure:**
+- Interconnected layers of nodes that process information
+- Can have many layers
+- Each connection has a **weight** based on inputs
+- **Parameters:** The weights in the model
+
+### How Word2Vec Works
+
+#### Core Principle
+Generates word embeddings by analyzing which words tend to appear next to each other in sentences
+
+#### Training Process
+
+**Step 1: Initialization**
+- Assign every word in vocabulary a vector embedding
+- Example: 5 values per word
+- Start with random values
+
+**Step 2: Training Iterations**
+- Take pairs of words from training data
+- Model predicts whether they are likely to be neighbors in a sentence
+- **Learning:** Model understands relationships between words
+- **Distillation:** Information stored in the embedding
+
+**Step 3: Relationship Learning**
+- If two words have the same neighbors → embeddings become closer
+- Different neighborhoods → embeddings move further apart
+
+**Result:** Embeddings capture the meaning of words
+
+---
+
+## Understanding Embeddings
+
+### What Embeddings Represent
+
+**Properties Concept:**
+Embeddings capture meaning by representing properties of words
+
+**Example: "cats"**
+- Values range between -1 and 1
+- Low scores: newborn, human, fruits
+- High scores: animal, plural
+
+**Example: "puppy"**
+- High scores: animal, newborn
+- Low scores: all others (human, fruits, plural)
+
+### Dimensions
+- **Definition:** Number of properties/values an embedding has
+- **Size:** Generally fixed
+- **Scale:** Not uncommon to see 1,000+ dimensions
+- **Important Note:** In practice, you don't know what properties exactly represent (learned through complex mathematical calculations)
+
+### Using Embeddings for Comparison
+- **Similar meaning:** Words grouped together
+- **Different meaning:** Words further apart
+- **Similarity/dissimilarity:** Depends on training data
+
+---
+
+## Types of Embeddings
+
+### Representation Models
+**Definition:** Models that convert textual input to embeddings (e.g., Word2Vec)
+
+### Tokenization in Modern Models
+
+**Example Input:** "Her vocalization was melodic."
+
+**Tokenization Process:**
+- **Not** just splitting by whitespace
+- "vocalization" → "vocal" + "ization"
+- **Reason:** Tokenizers have fixed vocabulary
+- Cannot represent all words individually
+- Must find combinations when needed
+
+### Building Different Embedding Types
+
+#### Token Embeddings
+- One embedding per token
+- Direct output from model
+
+#### Word Embeddings
+- Created by averaging token embeddings
+- Example: "vocalization" = average("vocal", "ization")
+- Represents entire word
+
+#### Sentence Embeddings
+- Similar averaging/aggregation techniques
+- Represents entire sentence
+
+#### Document Embeddings
+- Longer text aggregation
+- Represents entire document
+
+**Note:** Many other types of embeddings exist beyond these examples
+
+---
+
+## Key Limitations of Word2Vec
+
+### Static Representations
+Word2Vec creates **static** representations - the same word always has the same embedding regardless of context
+
+**Preview:** Next lesson covers encoding/decoding **contextualized** information to address this limitation
+
+---
+
+## Key Takeaways
+
+1. **Semantic Meaning:** Word2Vec captures meaning, not just word presence
+2. **Neural Networks:** Enable learning complex relationships from data
+3. **Training on Context:** Word neighbors define meaning
+4. **Dimensional Space:** Embeddings exist in high-dimensional space where similar words cluster
+5. **Fixed Vocabulary:** Tokenizers work with limited vocabulary using subword combinations
+6. **Hierarchy of Embeddings:** Token → Word → Sentence → Document
+7. **Limitation:** Static representations lack context-awareness
