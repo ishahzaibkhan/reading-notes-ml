@@ -1,4 +1,3 @@
-```markdown
 # Self-Attention vs Masked Self-Attention in Transformers
 
 ## Word Embeddings
@@ -67,5 +66,3 @@
 | Transformer type | Encoder-Only | Decoder-Only |
 | Output | Context-Aware Embeddings | Generated text/tokens |
 | Best for | Classification, clustering | Text generation |
-
-```
