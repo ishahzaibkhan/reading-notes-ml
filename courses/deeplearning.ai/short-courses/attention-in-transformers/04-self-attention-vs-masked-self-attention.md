@@ -67,4 +67,5 @@
 | Transformer type | Encoder-Only | Decoder-Only |
 | Output | Context-Aware Embeddings | Generated text/tokens |
 | Best for | Classification, clustering | Text generation |
+
 ```
