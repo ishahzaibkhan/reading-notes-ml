@@ -1,4 +1,3 @@
-````markdown
 # Generative AI vs. Agentic AI — Conceptual Foundations
 
 ## Part 1: Understanding the AI Landscape
@@ -85,4 +84,8 @@ The agent introduces three transformative traits absent in all prior stages:
 > **Agentic AI** is a *behavior* — it reasons, plans, and executes toward goals.
 
 Generative AI is not replaced by Agentic AI — it serves as the **foundational building block** that powers the reasoning and language abilities of agents. This relationship is central to understanding LangGraph and everything that follows in this curriculum.
-````
+
+[Generative AI vs Agentic AI | Agentic AI using LangGraph | Video 1 | CampusX - YouTube](https://www.youtube.com/watch?v=xdA0pGDiUPE&list=PLKnIA16_RmvYsvB8qkUQuJmJNuiCUJFPL&index=3)
+
+
+
